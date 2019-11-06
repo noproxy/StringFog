@@ -46,7 +46,7 @@ public final class ClassVisitorFactory {
     }
 
     private static ClassVisitor createEmpty(ClassWriter cw) {
-        return new ClassVisitor(Opcodes.ASM5, cw) {
+        return new ClassVisitor(Opcodes.ASM6, cw) {
         };
     }
 
