@@ -101,7 +101,7 @@ public final class StringFogClassInjector {
                     entryOut.setCompressedSize(-1);
                     zos.putNextEntry(entryOut);
                     if (!entryIn.isDirectory()) {
-                        if (entryName.endsWith(".class") && !shouldExclude) {
+                        if (!entryName.equals("module-info.class") && entryName.endsWith(".class") && !shouldExclude) {
                             processClass(zis, zos);
                         } else {
                             copy(zis, zos);
