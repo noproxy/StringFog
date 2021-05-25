@@ -57,8 +57,10 @@ public final class StringFogClassInjector {
         InputStream is = null;
         OutputStream os = null;
         try {
-            is = new BufferedInputStream(new FileInputStream(fileIn));
-            os = new BufferedOutputStream(new FileOutputStream(fileOut));
+            final FileInputStream fi = new FileInputStream(fileIn);
+            final File fo = fileOut;
+            is = new BufferedInputStream(fi);
+            os = new BufferedOutputStream(new FileOutputStream(fo));
             processClass(is, os);
         } finally {
             closeQuietly(os);
@@ -124,6 +126,7 @@ public final class StringFogClassInjector {
             while ((read = classIn.read(buffer)) >= 0) {
                 classOut.write(buffer, 0, read);
             }
+            classOut.flush();
         } else {
             ClassWriter cw = new ClassWriter(0);
             ClassVisitor cv = ClassVisitorFactory.create(mStringFogImpl, mMappingPrinter, mFogPackages,
